@@ -15,8 +15,8 @@ Simple whatsapp bot for making stickers from images, and some other small featur
 4. Scan the QR code with your WhatsApp
 5. Bot is already running
 
-\*\* Chat with the keyword #hi #hai #halo #hello to see what this bot can do
-\*\* Add bots to the group to make it more fun
+\*\* Chat with the keyword #hi #hai #halo #hello to see what this bot can do  
+\*\* Add bots to the group to make it more fun  
 \*\* If you use Ubuntu and find error, install some dependencies below
 
 ```
