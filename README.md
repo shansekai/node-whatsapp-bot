@@ -1,6 +1,6 @@
-# node-whatsapp-sticker-bot
+# node-whatsapp-bot
 
-Simple whatsapp bot for creating stickers from images sent or quoted from chat or groups
+Simple whatsapp bot for making stickers from images, and some other small features
 
 ## Things needed
 
@@ -15,8 +15,8 @@ Simple whatsapp bot for creating stickers from images sent or quoted from chat o
 4. Scan the QR code with your WhatsApp
 5. Bot is already running
 
-\*\* Add this bot in a group or chat directly to the number and send an image with the caption #sticker then the image will turn into a sticker, you can also quote a picture from someone in the group with the caption #sticker
-
+\*\* Chat with the keyword #hi #hai #halo #hello to see what this bot can do
+\*\* Add bots to the group to make it more fun
 \*\* If you use Ubuntu and find error, install some dependencies below
 
 ```
@@ -25,5 +25,5 @@ sudo apt install -y ca-certificates fonts-liberation libappindicator3-1 libasoun
 
 ## Screenshot
 
-<img src="/screenshot/Screen%20Shot%202020-07-30%20at%2001.21.23.png" width="300">
-<img src="/screenshot/Screen%20Shot%202020-07-30%20at%2001.21.35.png" width="300">
+<img src="/screenshot/Screen Shot 2020-08-05 at 02.16.34.png" width="300">
+<img src="/screenshot/Screen Shot 2020-08-05 at 02.16.45.png" width="300">
