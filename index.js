@@ -54,7 +54,7 @@ const start = async (client) => {
 
 // start wa client
 wa.create({
-	autoRefresh: true,
+	autoRefresh: false,
 	qrRefreshS: 15,
 })
 	.then(async (client) => await start(client))
