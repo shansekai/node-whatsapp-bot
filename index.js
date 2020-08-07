@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { decryptMedia, create } from '@open-wa/wa-automate';
-import { tz } from 'moment-timezone';
-import korona from './korona';
+const { create, decryptMedia } = require('@open-wa/wa-automate');
+const { tz } = require('moment-timezone');
+const { korona } = require('./korona');
 
 const debug = async (text) => {
   console.log(tz('Asia/Jakarta').format() + text);
