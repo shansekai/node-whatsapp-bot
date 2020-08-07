@@ -4,8 +4,8 @@ Simple whatsapp bot for making stickers from images, and some other small featur
 
 ## Things needed
 
--   A server with a LTS version of Node.Js
--   WhatsApp account already logged in on a smartphone
+- A server with a LTS version of Node. Js
+- WhatsApp account already logged in on a smartphone
 
 ## Usage guide
 
@@ -15,15 +15,16 @@ Simple whatsapp bot for making stickers from images, and some other small featur
 4. Scan the QR code with your WhatsApp
 5. Bot is already running
 
-\*\* Chat with the keyword #hi #hai #halo #hello to see what this bot can do  
+\*\* Chat with the keyword #hi #hai #halo #hello to see what this bot can do
+
 \*\* Add bots to the group to make it more fun  
 \*\* If you use Ubuntu and find error, install some dependencies below
 
-```
+```bash
 sudo apt install -y ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
 ```
 
 ## Screenshot
 
-<img src="/screenshot/Screen Shot 2020-08-05 at 02.16.34.png" width="300">
-<img src="/screenshot/Screen Shot 2020-08-05 at 02.16.45.png" width="300">
+![ss](screenshot/Screen%20Shot%202020-08-05%20at%2002.16.34.png)
+![ss](screenshot/Screen%20Shot%202020-08-05%20at%2002.16.45.png)

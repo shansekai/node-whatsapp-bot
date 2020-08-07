@@ -1,19 +1,19 @@
 {
-	"name": "node-wa-sticker-bot",
-	"version": "1.0.0",
-	"main": "index.js",
-	"license": "MIT",
-	"dependencies": {
-		"@open-wa/wa-automate": "^1.9.105",
-		"axios": "^0.19.2",
-		"moment-timezone": "^0.5.31"
-	},
-	"scripts": {
-		"start": "node ."
-	},
-	"devDependencies": {
-		"eslint": "^7.6.0",
-		"eslint-config-airbnb-base": "^14.2.0",
-		"eslint-plugin-import": "^2.22.0"
-	}
+  "name": "node-wa-sticker-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@open-wa/wa-automate": "^1.9.105",
+    "axios": "^0.19.2",
+    "moment-timezone": "^0.5.31"
+  },
+  "scripts": {
+    "start": "node ."
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
 }
