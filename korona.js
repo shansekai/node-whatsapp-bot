@@ -5,7 +5,7 @@ module.exports = async () => {
   try {
     const response = await axios.get('https://api.kawalcorona.com/indonesia/');
     // eslint-disable-next-line object-curly-newline
-    const { positif, sembuh, meninggal, dirawat } = response.data[0];
+    const { positif, sembuh, meninggal, dirawat } = await response.data[0];
     let korona = 'Data Korona Indonesia Saat ini 🦠\n\n';
     korona += `😔 Positif : ${positif}\n`;
     korona += `😊 Sembuh : ${sembuh}\n`;
@@ -17,4 +17,3 @@ module.exports = async () => {
     return error;
   }
 };
-// korona();
