@@ -18,7 +18,7 @@ const messageHandler = async (message, client) => {
   const bodyText = body ? body.toLowerCase() : '';
 
   // image caption contain #sticker or #stiker
-  if (captionText === '#sticker' || captionText === '#stiker') {
+  if (captionText === '#sticker' || captionText === '#stiker' || bodyText === '#sticker' || bodyText === '#stiker') {
     // general message
     if (type === 'image') {
       debug(madeStickerMessage);
