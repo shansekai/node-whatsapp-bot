@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const axios = require('axios').default;
 
 module.exports = async () => {
@@ -16,3 +17,4 @@ module.exports = async () => {
     return error;
   }
 };
+// korona();

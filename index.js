@@ -26,7 +26,7 @@ const start = async (client) => {
       client.sendText(message.from, waitSticker);
       const mediaData = await decryptMedia(message);
       const imageBase64 = `data:${message.mimetype};base64,${mediaData.toString('base64')}`;
-      client.sendImageAsSticker(message.from, imageBase64);
+      await client.sendImageAsSticker(message.from, imageBase64);
     }
     // quoted image with text #sticker
     if (message.quotedMsg && message.quotedMsg.type === 'image' && message.body === '#sticker') {
@@ -34,7 +34,7 @@ const start = async (client) => {
       client.sendText(message.from, waitSticker);
       const mediaData = await decryptMedia(message.quotedMsg);
       const imageBase64 = `data:${message.quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
-      client.sendImageAsSticker(message.from, imageBase64);
+      await client.sendImageAsSticker(message.from, imageBase64);
     }
     // hello message
     if (message.body === '#hi' || message.body === '#hai' || message.body === '#halo' || message.body === '#hello') {
@@ -42,13 +42,13 @@ const start = async (client) => {
       let botFeatureMsg = 'Hai 🙋🏻‍♂️, dibawah ini beberapa fitur yang bisa kalian gunakan\n\n';
       botFeatureMsg += '#sticker => Membuat stiker dari gambar 🖼\n';
       botFeatureMsg += '#korona => Data Korona Indonesia 🦠\n';
-      client.sendText(message.from, botFeatureMsg);
+      await client.sendText(message.from, botFeatureMsg);
     }
     // korona
     if (message.body === '#korona') {
       debug(generalMsg);
-      client.sendText(message.from, waitRequest);
-      client.sendText(message.from, await korona());
+      await client.sendText(message.from, waitRequest);
+      await client.sendText(message.from, await korona());
     }
   });
 };
