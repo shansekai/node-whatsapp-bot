@@ -9,46 +9,56 @@ const debug = async (text) => {
 
 const messageHandler = async (message, client) => {
   // eslint-disable-next-line object-curly-newline
-  const { from, sender, caption, type, quotedMsg, mimetype, body } = await message;
-  const madeStickerMessage = ` => 🖼 someone made a sticker - ${from} - ${sender.pushname}`;
+  const { from, sender, caption, type, quotedMsg, mimetype, body, isMedia } = await message;
+  const madeStickerMessage = ` => 🛠 stickers made - ${from} - ${sender.pushname}`;
   const incomingMessage = ` => 📩 someone sent a message - ${from} - ${sender.pushname}`;
   const waitingForStickerMessage = 'Tunggu sebentar stiker lagi dibuat ⏳';
   const waitingForRequestsMessage = 'Tunggu sebentar data sedang di proses ⏳';
-  const captionText = caption ? caption.toLowerCase() : '';
-  const bodyText = body ? body.toLowerCase() : '';
-
-  // image caption contain #sticker or #stiker
-  if (captionText === '#sticker' || captionText === '#stiker' || bodyText === '#sticker' || bodyText === '#stiker') {
-    // general message
-    if (type === 'image') {
-      debug(madeStickerMessage);
-      client.sendText(from, waitingForStickerMessage);
-      const mediaData = await decryptMedia(message);
-      const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
-      await client.sendImageAsSticker(from, imageBase64);
+  const somethingWrongMessage = 'Sepertinya ada yang salah, coba beberapa saat lagi 🚴🏻';
+  let botFeatureMsg = 'Hai 🙋🏻‍♂️, dibawah ini beberapa fitur yang bisa kalian gunakan\n\n';
+  botFeatureMsg += '#sticker => Membuat stiker dari gambar 🖼\n';
+  botFeatureMsg += '#korona => Data Korona Indonesia 🦠\n';
+  const completeMessage = 'Tugas selesai 👌, untuk melihat semua fitur bot ketik #menu / #help / #halo / #hai';
+  const keyword = caption || body || '';
+  try {
+    // eslint-disable-next-line default-case
+    switch (keyword.toLowerCase()) {
+      case '#sticker':
+      case '#stiker':
+        if (isMedia && type === 'image') {
+          debug(madeStickerMessage);
+          client.sendText(from, waitingForStickerMessage);
+          const mediaData = await decryptMedia(message);
+          const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
+          await client.sendImageAsSticker(from, imageBase64);
+          await client.sendText(from, completeMessage);
+        }
+        if (quotedMsg && quotedMsg.type === 'image') {
+          debug(madeStickerMessage);
+          client.sendText(from, waitingForStickerMessage);
+          const mediaData = await decryptMedia(quotedMsg);
+          const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
+          await client.sendImageAsSticker(from, imageBase64);
+          await client.sendText(from, completeMessage);
+        }
+        break;
+      case '#hai':
+      case '#halo':
+      case '#menu':
+      case '#help':
+        debug(incomingMessage);
+        await client.sendText(from, botFeatureMsg);
+        break;
+      case '#korona':
+        debug(incomingMessage);
+        await client.sendText(from, waitingForRequestsMessage);
+        await client.sendText(from, await korona());
+        await client.sendText(from, completeMessage);
+        break;
     }
-    // quoted message
-    if (quotedMsg.type === 'image') {
-      debug(madeStickerMessage);
-      client.sendText(from, waitingForStickerMessage);
-      const mediaData = await decryptMedia(quotedMsg);
-      const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
-      await client.sendImageAsSticker(from, imageBase64);
-    }
-  }
-  // info message
-  if (bodyText === '#hai' || bodyText === '#halo') {
-    debug(incomingMessage);
-    let botFeatureMsg = 'Hai 🙋🏻‍♂️, dibawah ini beberapa fitur yang bisa kalian gunakan\n\n';
-    botFeatureMsg += '#sticker => Membuat stiker dari gambar 🖼\n';
-    botFeatureMsg += '#korona => Data Korona Indonesia 🦠\n';
-    await client.sendText(from, botFeatureMsg);
-  }
-  // korona
-  if (bodyText === '#korona') {
-    debug(incomingMessage);
-    await client.sendText(from, waitingForRequestsMessage);
-    await client.sendText(from, await korona());
+  } catch (error) {
+    await client.sendText(from, somethingWrongMessage);
+    debug(` => ${error.message}`);
   }
 };
 
