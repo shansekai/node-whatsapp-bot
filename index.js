@@ -2,6 +2,7 @@
 const { create, decryptMedia } = require('@open-wa/wa-automate');
 const { tz } = require('moment-timezone');
 const korona = require('./korona');
+const quotes = require('./quotes');
 
 const debug = async (text) => {
   console.log(tz('Asia/Jakarta').format() + text);
@@ -53,6 +54,12 @@ const messageHandler = async (message, client) => {
         debug(incomingMessage);
         await client.sendText(from, waitingForRequestsMessage);
         await client.sendText(from, await korona());
+        await client.sendText(from, completeMessage);
+        break;
+      case '#quotes':
+        debug(incomingMessage);
+        await client.sendText(from, waitingForRequestsMessage);
+        await client.sendText(from, await quotes());
         await client.sendText(from, completeMessage);
         break;
     }
