@@ -18,7 +18,8 @@ const messageHandler = async (message, client) => {
   const somethingWrongMessage = 'Sepertinya ada yang salah, coba beberapa saat lagi 🚴🏻';
   let botFeatureMsg = 'Hai 🙋🏻‍♂️, dibawah ini beberapa fitur yang bisa kalian gunakan\n\n';
   botFeatureMsg += '#sticker => Membuat stiker dari gambar 🖼\n';
-  botFeatureMsg += '#korona => Data Korona Indonesia 🦠\n';
+  botFeatureMsg += '#korona => Data korona Indonesia 🦠\n';
+  botFeatureMsg += '#quotes => Random quotes Bahasa Indonesia 🦠\n';
   const completeMessage = 'Tugas selesai 👌, untuk melihat semua fitur bot ketik #menu / #help / #halo / #hai';
   const keyword = caption || body || '';
   try {
