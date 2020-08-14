@@ -18,6 +18,7 @@ const messageHandler = async (message, client) => {
   const waitingForStickerMessage = '_Tunggu sebentar stiker lagi dibuat ⏳_';
   const waitingForRequestsMessage = '_Tunggu sebentar data lagi di proses ⏳_';
   const somethingWrongMessage = '_Kayaknya ada yang salah, coba nanti lagi 🚴🏻_';
+  const completeMessage = '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_';
 
   const menuMessage = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
   
@@ -31,8 +32,6 @@ const messageHandler = async (message, client) => {
   _Random quotes Bahasa Indonesia 🔖_
   
   ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
-
-  const completeMessage = '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_';
 
   try {
     // eslint-disable-next-line default-case
