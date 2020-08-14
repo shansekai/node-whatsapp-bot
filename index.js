@@ -17,10 +17,10 @@ const messageHandler = async (message, client) => {
   const waitingForRequestsMessage = 'Tunggu sebentar data sedang di proses ⏳';
   const somethingWrongMessage = 'Sepertinya ada yang salah, coba beberapa saat lagi 🚴🏻';
   let botFeatureMsg = 'Hai 🙋🏻‍♂️, dibawah ini beberapa fitur yang bisa kalian gunakan\n\n';
-  botFeatureMsg += '#sticker => Membuat stiker dari gambar 🖼\n';
+  botFeatureMsg += '#sticker / #stiker => Membuat stiker dari gambar 🖼\n';
   botFeatureMsg += '#korona => Data korona Indonesia 🦠\n';
   botFeatureMsg += '#quotes => Random quotes Bahasa Indonesia 🔖\n';
-  const completeMessage = 'Tugas selesai 👌, untuk melihat semua fitur bot ketik #menu / #help / #halo / #hai';
+  const completeMessage = 'Tugas selesai 👌, untuk melihat semua fitur bot ketik #menu';
   const keyword = caption || body || '';
   try {
     // eslint-disable-next-line default-case
@@ -44,10 +44,7 @@ const messageHandler = async (message, client) => {
           await client.sendText(from, completeMessage);
         }
         break;
-      case '#hai':
-      case '#halo':
       case '#menu':
-      case '#help':
         debug(incomingMessage);
         await client.sendText(from, botFeatureMsg);
         break;
