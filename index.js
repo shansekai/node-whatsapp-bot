@@ -3,6 +3,7 @@ const { create, decryptMedia } = require('@open-wa/wa-automate');
 const { tz } = require('moment-timezone');
 const korona = require('./korona');
 const quotes = require('./quotes');
+const menu = require('./menu');
 
 const debug = async (text) => {
   console.log(tz('Asia/Jakarta').format() + text);
@@ -19,19 +20,6 @@ const messageHandler = async (message, client) => {
   const waitingForRequestsMessage = '_Tunggu sebentar data lagi di proses ⏳_';
   const somethingWrongMessage = '_Kayaknya ada yang salah, coba nanti lagi 🚴🏻_';
   const completeMessage = '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_';
-
-  const menuMessage = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
-  
-  *#sticker*
-  _Bikin stiker dari gambar 🖼, kirim gambar dan beri caption atau bisa juga quote/reply dari gambar yang sudah ada di chat/group_
-  
-  *#korona*
-  _Data korona Indonesia 🦠, data realtime dan terupdate dari sumber terpercaya_
-  
-  *#quotes*
-  _Random quotes Bahasa Indonesia 🔖_
-  
-  ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
 
   try {
     // eslint-disable-next-line default-case
@@ -58,7 +46,7 @@ const messageHandler = async (message, client) => {
         break;
       case '#menu':
         debug(incomingMessage);
-        await client.sendText(from, menuMessage);
+        await client.sendText(from, menu);
         break;
       case '#korona':
         debug(incomingMessage);
