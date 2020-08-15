@@ -19,6 +19,10 @@ _(contoh: #zodiak anya 11-11-1991)_
 *#ramalan <nama> <tgl> <nama> <tgl>*
 _Ramalan Kecocokan Cinta dengan Pasangan ❤️_
 _(contoh: #ramalan andi 11-11-1991 anggi 11-11-1991)_
+
+*#anon|<nomor>|<pesan>*
+_Kirim Pesan Anonymous ke Seseorang 🎭_
+(contoh: #anon|6289111111111|hai kak)
   
 ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
 
