@@ -1,7 +1,7 @@
 module.exports = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
 
 *#sticker*
-_Bikin Stiker dari gambar 🖼, kirim gambar dan beri caption atau bisa juga quote/reply dari gambar yang sudah ada di chat/group_
+_Bikin Stiker dari Gambar 🖼, kirim gambar dan beri caption atau bisa juga quote/reply dari gambar yang sudah ada di chat/group_
 
 *#korona*
 _Data Korona Indonesia 🦠, data realtime dan terupdate dari sumber terpercaya_
@@ -15,6 +15,10 @@ _Random Wallpaper Cantik 🌈_
 *#zodiak(spasi)nama(spasi)tgl*
 _Cek Zodiak Kamu 🐟_
 _(contoh: #zodiak anya 11-11-1991)_
+
+*#ramalan(spasi)nama(spasi)tgl(spasi)nama(spasi)tgl*
+_Ramalan Kecocokan Cinta dengan Pasangan ❤️_
+_(contoh: #ramalan andi 11-11-1991 anggi 11-11-1991)_
   
 ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
 
