@@ -16,7 +16,7 @@ const debug = async (text) => {
 
 const messageHandler = async (message, client) => {
   // eslint-disable-next-line object-curly-newline
-  const { from, sender, caption, type, quotedMsg, mimetype, body, isMedia, chat, isGroupMsg, chatId } = await message;
+  const { from, sender, caption, type, quotedMsg, mimetype, body, isMedia, chat, isGroupMsg } = await message;
 
   const commandArgs = caption || body || '';
   const command = commandArgs.toLowerCase().split(' ')[0];
