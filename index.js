@@ -7,6 +7,7 @@ const { parsePhoneNumberFromString } = require('libphonenumber-js');
 const korona = require('./korona');
 const quotes = require('./quotes');
 const menu = require('./menu');
+const { wallpaper } = require('./wallpaper');
 
 const debug = async (text) => {
   console.log(`${tz('Asia/Jakarta').format('LTS')} 🤖 => ${text}`);
@@ -90,6 +91,19 @@ const messageHandler = async (message, client) => {
       //     }
       //   });
       //   break;
+      case '#wp':
+        debug(inMsg);
+        client.sendText(from, waitDataMsg);
+        wallpaper
+          .then((result) => {
+            client.sendFileFromUrl(from, result);
+            client.sendText(from, doneMsg);
+          })
+          .catch((error) => {
+            client.sendText(from, wrongMsg);
+            console.log(error.message);
+          });
+        break;
       default:
         if (!isGroupMsg) {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim'];
