@@ -128,7 +128,7 @@ const start = async (client) => {
 
 const options = {};
 if (process.platform === 'darwin') options.executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
+// if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
 
 create(options)
   .then(async (client) => start(client))
