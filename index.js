@@ -127,7 +127,7 @@ const messageHandler = async (message, client) => {
         client.sendText(from, waitDataMsg);
         ramalanCinta(args1, args2, args3, args4)
           .then((result) => {
-            client.sendText(from, result.toString());
+            client.sendText(from, result);
             client.sendText(from, doneMsg);
           })
           .catch((error) => {
