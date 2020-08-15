@@ -169,11 +169,6 @@ const start = async (client) => {
   unreadMessages.forEach((element) => {
     messageHandler(element, client);
   });
-  // get all chat
-  const allChats = await client.getAllChats();
-  allChats.forEach((element) => {
-    console.log(element);
-  });
   // handle live message
   client.onMessage(async (message) => {
     messageHandler(message, client);
