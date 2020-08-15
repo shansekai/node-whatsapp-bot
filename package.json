@@ -6,7 +6,9 @@
   "dependencies": {
     "@open-wa/wa-automate": "^1.9.105",
     "axios": "^0.19.2",
-    "moment-timezone": "^0.5.31"
+    "libphonenumber-js": "^1.7.56",
+    "moment-timezone": "^0.5.31",
+    "video-url-link": "^0.1.4"
   },
   "scripts": {
     "start": "node ."

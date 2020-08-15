@@ -8,5 +8,9 @@ _Data korona Indonesia 🦠, data realtime dan terupdate dari sumber terpercaya_
   
 *#quotes*
 _Random quotes Bahasa Indonesia 🔖_
+
+*#ig(spasi)link*
+_Download foto 🖼 atau video 🎥 dari instagram_
+_(contoh: #ig https://www.instagram.com/p/CD5mB72JXXv)_
   
 ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
