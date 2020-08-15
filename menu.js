@@ -1,4 +1,4 @@
-module.exports = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
+module.exports.menu = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
 
 *#sticker*
 _Bikin Stiker dari Gambar 🖼, kirim gambar dan beri caption atau bisa juga quote/reply dari gambar yang sudah ada di chat/group_
