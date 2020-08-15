@@ -12,16 +12,16 @@ _Random Quotes Bahasa Indonesia 🔖_
 *#wp*
 _Random Wallpaper Cantik 🌈_
 
-*#zodiak(spasi)nama(spasi)tgl*
+*#zodiak <nama> <tgl>*
 _Cek Zodiak Kamu 🐟_
 _(contoh: #zodiak anya 11-11-1991)_
 
-*#ramalan(spasi)nama(spasi)tgl(spasi)nama(spasi)tgl*
+*#ramalan <nama> <tgl> <nama> <tgl>*
 _Ramalan Kecocokan Cinta dengan Pasangan ❤️_
 _(contoh: #ramalan andi 11-11-1991 anggi 11-11-1991)_
   
 ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
 
-// *#ig(spasi)link*
+// *#ig <link>*
 // _Download foto 🖼 atau video 🎥 dari instagram_
 // _(contoh: #ig https://www.instagram.com/p/CD5mB72JXXv)_
