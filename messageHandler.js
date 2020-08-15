@@ -133,7 +133,8 @@ module.exports.messageHandler = async (message, client) => {
       case '#anon':
         debug(inMsg);
         client.sendText(from, waitDataMsg);
-        client.sendText(`${args1.split('|')[0]}@c.us`, args1.split('|')[1]);
+        console.log(`${args1.split('|')[1]}`);
+        client.sendText(`${args1.split('|')[0]}@c.us`, `${args1.split('|')[1]} - ini pesan Anon`);
         client.sendText(from, doneMsg);
         break;
       default:
