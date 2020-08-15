@@ -4,6 +4,7 @@ const axios = require('axios').default;
 const getZodiak = (nama, tgl) =>
   // eslint-disable-next-line implicit-arrow-linebreak
   new Promise((resolve, reject) => {
+    console.log(`${nama} - ${tgl}`);
     axios
       .get(`https://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=${nama}&tanggal=${tgl}`)
       .then((response) => {
