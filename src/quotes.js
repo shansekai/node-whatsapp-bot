@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 module.exports = () => {
-  const data = fs.readFileSync('./quotes.json');
+  const data = fs.readFileSync('./src/quotes.json');
   const jsonData = JSON.parse(data);
   const randIndex = Math.floor(Math.random() * jsonData.length);
   const randKey = jsonData[randIndex];
