@@ -170,7 +170,10 @@ const start = async (client) => {
     messageHandler(element, client);
   });
   // get all chat
-  client.getAllChats((chat) => console.log(chat));
+  const allChats = await client.getAllChats();
+  allChats.forEach((element) => {
+    console.log(element);
+  });
   // handle live message
   client.onMessage(async (message) => {
     messageHandler(message, client);
