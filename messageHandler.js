@@ -28,6 +28,7 @@ module.exports.messageHandler = async (message, client) => {
   const stickerCreatedMsg = `(${name} - ${number}) membuat stiker 🚀`;
   const inMsg = `(${name} - ${number}) mengirim pesan ${command} 📩`;
   const inMsgImgNoCapt = `(${name} - ${number}) mengirim gambar tanpa caption 📩`;
+  const inMsgAnon = `(${name} - ${number}) mengirim pesan anon ke seseorang 🎭`;
   const waitStickerMsg = '_Tunggu sebentar stiker lagi dibuat ⏳_';
   const thxMsg = '_Iya sama - sama 🤖_';
   // const waitVidMsg = '_Video lagi di upload tunggu aja 🎥_';
@@ -141,7 +142,7 @@ module.exports.messageHandler = async (message, client) => {
             debug(inMsg);
             client.sendText(from, thxMsg);
           } else if (commandArgs.includes('#anon')) {
-            debug(inMsg);
+            debug(inMsgAnon);
             client.sendText(from, waitDataMsg);
             client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - ini pesan Anon`);
             client.sendText(from, doneMsg);
