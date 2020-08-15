@@ -126,7 +126,9 @@ const start = async (client) => {
   });
 };
 
-const options = {};
+const options = {
+  headless: false,
+};
 if (process.platform === 'darwin') options.executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
 if (process.platform === 'win32' || process.platform === 'win64') options.executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
