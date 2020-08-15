@@ -93,7 +93,7 @@ const messageHandler = async (message, client) => {
       default:
         if (!isGroupMsg) {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim'];
-          const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs);
+          const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
           if (type === 'image' && !caption) {
             debug(inMsgImgNoCapt);
             client.sendText(from, noCaptMsg);
