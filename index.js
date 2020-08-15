@@ -20,7 +20,6 @@ const messageHandler = async (message, client) => {
 
   const commandArgs = caption || body || '';
   const command = commandArgs.toLowerCase().split(' ')[0];
-  const args = commandArgs.split(' ')[1];
 
   const phoneNumber = parsePhoneNumberFromString(from, 'ID');
   const number = phoneNumber ? phoneNumber.number : '';
@@ -108,7 +107,7 @@ const messageHandler = async (message, client) => {
       case '#zodiak':
         debug(inMsg);
         client.sendText(from, waitDataMsg);
-        getZodiak(args.split(' ')[0], args.split(' ')[1])
+        getZodiak(commandArgs.split(' ')[1], commandArgs.split(' ')[2])
           .then((result) => {
             client.sendText(from, result);
             client.sendText(from, doneMsg);
