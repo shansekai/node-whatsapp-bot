@@ -7,6 +7,7 @@ const getZodiak = (nama, tgl) =>
     axios
       .get(`https://script.google.com/macros/exec?service=AKfycbw7gKzP-WYV2F5mc9RaR7yE3Ve1yN91Tjs91hp_jHSE02dSv9w&nama=${nama}&tanggal=${tgl}`)
       .then((response) => {
+        console.log(response.data);
         // eslint-disable-next-line object-curly-newline
         const { lahir, usia, ultah, zodiak } = response.data.data;
         let text = `*Nama*: ${nama}\n`;
