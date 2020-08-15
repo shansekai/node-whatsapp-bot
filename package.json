@@ -6,8 +6,10 @@
   "dependencies": {
     "@open-wa/wa-automate": "^1.9.105",
     "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "libphonenumber-js": "^1.7.56",
     "moment-timezone": "^0.5.31",
+    "qs": "^6.9.4",
     "video-url-link": "^0.1.4"
   },
   "scripts": {

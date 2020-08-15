@@ -9,6 +9,7 @@ const quotes = require('./quotes');
 const menu = require('./menu');
 const { wallpaper } = require('./wallpaper');
 const { getZodiak } = require('./zodiak');
+const { ramalanCinta } = require('./ramalan');
 
 const debug = async (text) => {
   console.log(`${tz('Asia/Jakarta').format('LTS')} 🤖 => ${text}`);
@@ -22,6 +23,8 @@ const messageHandler = async (message, client) => {
   const command = commandArgs.toLowerCase().split(' ')[0];
   const args1 = commandArgs.split(' ')[1];
   const args2 = commandArgs.split(' ')[2];
+  const args3 = commandArgs.split(' ')[3];
+  const args4 = commandArgs.split(' ')[4];
 
   const phoneNumber = parsePhoneNumberFromString(from, 'ID');
   const number = phoneNumber ? phoneNumber.number : '';
@@ -110,6 +113,19 @@ const messageHandler = async (message, client) => {
         debug(inMsg);
         client.sendText(from, waitDataMsg);
         getZodiak(args1, args2)
+          .then((result) => {
+            client.sendText(from, result);
+            client.sendText(from, doneMsg);
+          })
+          .catch((error) => {
+            client.sendText(from, wrongMsg);
+            console.log(error.message);
+          });
+        break;
+      case '#ramalan':
+        debug(inMsg);
+        client.sendText(from, waitDataMsg);
+        ramalanCinta(args1, args2, args3, args4)
           .then((result) => {
             client.sendText(from, result);
             client.sendText(from, doneMsg);
