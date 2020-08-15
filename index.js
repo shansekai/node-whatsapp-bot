@@ -51,6 +51,7 @@ const messageHandler = async (message, client) => {
           const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
           client.sendImageAsSticker(from, imageBase64);
           client.sendText(from, doneMsg);
+          client.markAsUnread(chatId);
         }
         if (quotedMsg && quotedMsg.type === 'image') {
           debug(inMsg);
@@ -60,6 +61,7 @@ const messageHandler = async (message, client) => {
           const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
           client.sendImageAsSticker(from, imageBase64);
           client.sendText(from, doneMsg);
+          client.markAsUnread(chatId);
         }
         break;
       case '#menu':
@@ -139,9 +141,6 @@ const messageHandler = async (message, client) => {
   } catch (error) {
     client.sendText(from, wrongMsg);
     console.log(error.message);
-  } finally {
-    // mark unread
-    client.markAsUnread(chatId);
   }
 };
 
