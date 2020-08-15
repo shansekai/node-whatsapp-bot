@@ -26,5 +26,4 @@ sudo apt install -y ca-certificates fonts-liberation libappindicator3-1 libasoun
 
 ## Screenshot
 
-![ss](screenshot/Screen%20Shot%202020-08-05%20at%2002.16.34.png)
-![ss](screenshot/Screen%20Shot%202020-08-05%20at%2002.16.45.png)
+![ss](screenshot/Screen%20Shot%202020-08-15%20at%2022.06.50.png)
