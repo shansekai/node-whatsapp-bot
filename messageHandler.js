@@ -130,6 +130,12 @@ module.exports.messageHandler = async (message, client) => {
             console.log(error.message);
           });
         break;
+      case '#anon':
+        debug(inMsg);
+        client.sendText(from, waitDataMsg);
+        client.sendText(`${args1.split('|')[0]}@c.us`, args1.split('|')[1]);
+        client.sendText(from, doneMsg);
+        break;
       default:
         if (!isGroupMsg) {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
