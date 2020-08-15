@@ -162,7 +162,7 @@ const start = async (client) => {
 const options = {
   headless: false,
   cacheEnabled: false,
-  customUserAgent: 'Mozilla/5.0 (Windows NT 6.2; rv:20.0) Gecko/20121202 Firefox/20.0',
+  // customUserAgent: 'Mozilla/5.0 (Windows NT 6.2; rv:20.0) Gecko/20121202 Firefox/20.0',
 };
 if (process.platform === 'darwin') options.executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
