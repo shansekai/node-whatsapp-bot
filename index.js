@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const { create, decryptMedia } = require('@open-wa/wa-automate');
 const { tz } = require('moment-timezone');
-const videoUrlLink = require('video-url-link');
+// const videoUrlLink = require('video-url-link');
 const { parsePhoneNumberFromString } = require('libphonenumber-js');
 const korona = require('./korona');
 const quotes = require('./quotes');
@@ -18,7 +18,7 @@ const messageHandler = async (message, client) => {
 
   const commandArgs = caption || body || '';
   const command = commandArgs.toLowerCase().split(' ')[0];
-  const args = commandArgs.split(' ')[1];
+  // const args = commandArgs.split(' ')[1];
 
   const phoneNumber = parsePhoneNumberFromString(from, 'ID');
   const number = phoneNumber ? phoneNumber.number : '';
@@ -29,7 +29,7 @@ const messageHandler = async (message, client) => {
   const inMsgImgNoCapt = `(${name} - ${number}) mengirim gambar tanpa caption 📩`;
   const waitStickerMsg = '_Tunggu sebentar stiker lagi dibuat ⏳_';
   const thxMsg = '_Iya sama - sama 🤖_';
-  const waitVidMsg = '_Video lagi di upload tunggu aja 🎥_';
+  // const waitVidMsg = '_Video lagi di upload tunggu aja 🎥_';
   const waitDataMsg = '_Tunggu sebentar data lagi di proses ⏳_';
   const wrongMsg = '_Kayaknya ada yang salah, coba nanti lagi 🚴🏻_';
   const noCaptMsg = '_Pakai caption ya jangan gambar doang, ketik #menu 🤖_';
@@ -75,21 +75,21 @@ const messageHandler = async (message, client) => {
         client.sendText(from, quotes());
         client.sendText(from, doneMsg);
         break;
-      case '#ig':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
-        await videoUrlLink.instagram.getInfo(args, async (error, info) => {
-          if (error) {
-            client.sendText(from, wrongMsg);
-            console.log(error.message);
-          } else {
-            const url = info.list[0].video ? info.list[0].video : info.list[0].image;
-            client.sendText(from, waitVidMsg);
-            await client.sendFileFromUrl(from, url);
-            client.sendText(from, doneMsg);
-          }
-        });
-        break;
+      // case '#ig':
+      //   debug(inMsg);
+      //   client.sendText(from, waitDataMsg);
+      //   await videoUrlLink.instagram.getInfo(args, async (error, info) => {
+      //     if (error) {
+      //       client.sendText(from, wrongMsg);
+      //       console.log(error.message);
+      //     } else {
+      //       const url = info.list[0].video ? info.list[0].video : info.list[0].image;
+      //       client.sendText(from, waitVidMsg);
+      //       await client.sendFileFromUrl(from, url);
+      //       client.sendText(from, doneMsg);
+      //     }
+      //   });
+      //   break;
       default:
         if (!isGroupMsg) {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim'];
@@ -126,11 +126,10 @@ const start = async (client) => {
   });
 };
 
-const options = {
-  // chromiumArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
-};
+const options = {};
 if (process.platform === 'darwin') options.executablePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
-// if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
+if (process.platform === 'linux') options.executablePath = '/usr/bin/google-chrome-stable';
+if (process.platform === 'win32' || process.platform === 'win64') options.executablePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
 
 create(options)
   .then(async (client) => start(client))
