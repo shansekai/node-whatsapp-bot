@@ -131,12 +131,6 @@ module.exports.messageHandler = async (message, client) => {
           });
         break;
       default:
-        if (commandArgs.includes('#anon')) {
-          debug(inMsg);
-          client.sendText(from, waitDataMsg);
-          client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - ini pesan Anon`);
-          client.sendText(from, doneMsg);
-        }
         if (!isGroupMsg) {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
           const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
@@ -146,6 +140,11 @@ module.exports.messageHandler = async (message, client) => {
           } else if (isThanks) {
             debug(inMsg);
             client.sendText(from, thxMsg);
+          } else if (commandArgs.includes('#anon')) {
+            debug(inMsg);
+            client.sendText(from, waitDataMsg);
+            client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - ini pesan Anon`);
+            client.sendText(from, doneMsg);
           } else {
             debug(inMsg);
             client.sendText(from, unkMsg);
