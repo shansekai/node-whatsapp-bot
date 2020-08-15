@@ -151,7 +151,7 @@ const start = async (client) => {
   // handle unread message after downtime
   const unreadMessages = await client.getAllUnreadMessages();
   unreadMessages.forEach((element) => {
-    console.log(element);
+    messageHandler(element, client);
   });
   // handle live message
   client.onMessage(async (message) => {
