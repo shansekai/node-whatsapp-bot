@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 const { create } = require('@open-wa/wa-automate');
 const { messageHandler } = require('./messageHandler');
-const { debug } = require('./debug');
+const { debug } = require('./src/debug');
 
 const start = async (client) => {
   debug('The bot has started');

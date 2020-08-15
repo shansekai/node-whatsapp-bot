@@ -2,13 +2,13 @@
 /* eslint-disable max-len */
 const { decryptMedia } = require('@open-wa/wa-automate');
 const { parsePhoneNumberFromString } = require('libphonenumber-js');
-const { debug } = require('./debug');
-const korona = require('./korona');
-const quotes = require('./quotes');
-const { menu } = require('./menu');
-const { wallpaper } = require('./wallpaper');
-const { getZodiak } = require('./zodiak');
-const { ramalanCinta } = require('./ramalan');
+const { debug } = require('./src/debug');
+const korona = require('./src/korona');
+const quotes = require('./src/quotes');
+const { menu } = require('./src/menu');
+const { wallpaper } = require('./src/wallpaper');
+const { getZodiak } = require('./src/zodiak');
+const { ramalanCinta } = require('./src/ramalan');
 
 module.exports.messageHandler = async (message, client) => {
   // eslint-disable-next-line object-curly-newline
