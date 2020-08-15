@@ -8,6 +8,7 @@ const korona = require('./korona');
 const quotes = require('./quotes');
 const menu = require('./menu');
 const { wallpaper } = require('./wallpaper');
+const { getZodiak } = require('./zodiak');
 
 const debug = async (text) => {
   console.log(`${tz('Asia/Jakarta').format('LTS')} 🤖 => ${text}`);
@@ -19,7 +20,7 @@ const messageHandler = async (message, client) => {
 
   const commandArgs = caption || body || '';
   const command = commandArgs.toLowerCase().split(' ')[0];
-  // const args = commandArgs.split(' ')[1];
+  const args = commandArgs.split(' ')[1];
 
   const phoneNumber = parsePhoneNumberFromString(from, 'ID');
   const number = phoneNumber ? phoneNumber.number : '';
@@ -97,6 +98,19 @@ const messageHandler = async (message, client) => {
         wallpaper
           .then((result) => {
             client.sendFileFromUrl(from, result);
+            client.sendText(from, doneMsg);
+          })
+          .catch((error) => {
+            client.sendText(from, wrongMsg);
+            console.log(error.message);
+          });
+        break;
+      case '#zodiak':
+        debug(inMsg);
+        client.sendText(from, waitDataMsg);
+        getZodiak(args.split(' ')[0], args.split(' ')[1])
+          .then((result) => {
+            client.sendText(from, result);
             client.sendText(from, doneMsg);
           })
           .catch((error) => {
