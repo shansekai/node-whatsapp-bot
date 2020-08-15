@@ -20,13 +20,15 @@ const messageHandler = async (message, client) => {
 
   const commandArgs = caption || body || '';
   const command = commandArgs.toLowerCase().split(' ')[0];
+  const args1 = commandArgs.split(' ')[1];
+  const args2 = commandArgs.split(' ')[2];
 
   const phoneNumber = parsePhoneNumberFromString(from, 'ID');
   const number = phoneNumber ? phoneNumber.number : '';
   const name = sender.pushname || chat.name || sender.verifiedName || '';
 
   const stickerCreatedMsg = `(${name} - ${number}) membuat stiker 🚀`;
-  const inMsg = `(${name} - ${number}) mengirim pesan ${commandArgs} 📩`;
+  const inMsg = `(${name} - ${number}) mengirim pesan ${command} 📩`;
   const inMsgImgNoCapt = `(${name} - ${number}) mengirim gambar tanpa caption 📩`;
   const waitStickerMsg = '_Tunggu sebentar stiker lagi dibuat ⏳_';
   const thxMsg = '_Iya sama - sama 🤖_';
@@ -107,7 +109,7 @@ const messageHandler = async (message, client) => {
       case '#zodiak':
         debug(inMsg);
         client.sendText(from, waitDataMsg);
-        getZodiak(commandArgs.split(' ')[1], commandArgs.split(' ')[2])
+        getZodiak(args1, args2)
           .then((result) => {
             client.sendText(from, result);
             client.sendText(from, doneMsg);

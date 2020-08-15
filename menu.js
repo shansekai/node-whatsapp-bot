@@ -11,6 +11,10 @@ _Random Quotes Bahasa Indonesia 🔖_
 
 *#wp*
 _Random Wallpaper Cantik 🌈_
+
+*#zodiak(spasi)nama(spasi)tgl*
+_Cek Zodiak Kamu 🐟_
+_(contoh: #zodiak anya 11-11-1991)_
   
 ** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
 
