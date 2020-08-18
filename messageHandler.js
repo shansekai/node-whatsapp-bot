@@ -29,7 +29,7 @@ module.exports.messageHandler = async (message, client) => {
     debugText: `(${name} - ${number}) mengirim pesan ${commandArgs} 📩`,
     debugImage: `(${name} - ${number}) mengirim gambar 📩`,
     wait: '_Tunggu sebentar ⏳_',
-    done: '_Selesai ✅, ketik *#menu* buat kembali 🤖_',
+    done: '_Selesai ✅, donasi kesini ya https://saweria.co/mukhlis biar aku bisa tetep hidup, ketik *#menu* buat kembali 🤖_',
     replyThanks: '_Iya sama - sama, ketik *#menu* buat kembali 🤖_',
     errFailed: '_Ada kesalahan teknis, ketik *#menu* buat kembali 🤖_',
     errImgNoCaption: '_Harus pakai caption, ketik *#menu* buat kembali 🤖_',
