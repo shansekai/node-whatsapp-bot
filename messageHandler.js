@@ -26,7 +26,8 @@ module.exports.messageHandler = async (message, client) => {
   const name = sender.pushname || chat.name || sender.verifiedName || '';
 
   const msg = {
-    debugText: `(${name} - ${number}) mengirim pesan ${command} 📩`,
+    debugText: `(${name} - ${number}) mengirim pesan ${commandArgs} 📩`,
+    debugImage: `(${name} - ${number}) mengirim gambar 📩`,
     wait: '_Tunggu sebentar ⏳_',
     done: '_Selesai ✅, ketik *#menu* buat kembali 🤖_',
     replyThanks: '_Iya sama - sama, ketik *#menu* buat kembali 🤖_',
@@ -36,7 +37,11 @@ module.exports.messageHandler = async (message, client) => {
   };
 
   // debug all incoming message
-  debug(msg.debugText);
+  if (isMedia) {
+    debug(msg.debugImage);
+  } else {
+    debug(msg.debugText);
+  }
 
   try {
     switch (command) {
