@@ -26,9 +26,7 @@ module.exports.messageHandler = async (message, client) => {
   const name = sender.pushname || chat.name || sender.verifiedName || '';
 
   const msg = {
-    debugSticker: `(${name} - ${number}) membuat stiker 🚀`,
     debugText: `(${name} - ${number}) mengirim pesan ${command} 📩`,
-    debugImageNoCaption: `(${name} - ${number}) mengirim gambar tanpa caption 📩`,
     wait: '_Tunggu sebentar ⏳_',
     done: '_Selesai ✅, ketik *#menu* buat kembali 🤖_',
     replyThanks: '_Iya sama - sama, ketik *#menu* buat kembali 🤖_',
@@ -37,13 +35,14 @@ module.exports.messageHandler = async (message, client) => {
     errUnkCommand: '_Perintah tidak terdaftar, ketik *#menu* buat kembali 🤖_',
   };
 
+  // debug all incoming message
+  debug(msg.debugText);
+
   try {
     switch (command) {
       case '#sticker':
       case '#stiker':
         if (isMedia && type === 'image') {
-          debug(msg.debugText);
-          debug(msg.debugSticker);
           client.sendText(from, msg.wait);
           const mediaData = await decryptMedia(message);
           const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
@@ -51,8 +50,6 @@ module.exports.messageHandler = async (message, client) => {
           client.sendText(from, msg.done);
         }
         if (quotedMsg && quotedMsg.type === 'image') {
-          debug(msg.debugText);
-          debug(msg.debugSticker);
           client.sendText(from, msg.wait);
           const mediaData = await decryptMedia(quotedMsg);
           const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
@@ -61,23 +58,19 @@ module.exports.messageHandler = async (message, client) => {
         }
         break;
       case '#menu':
-        debug(msg.debugText);
         client.sendText(from, menu);
         break;
       case '#korona':
-        debug(msg.debugText);
         client.sendText(from, msg.wait);
         client.sendText(from, await korona());
         client.sendText(from, msg.done);
         break;
       case '#quotes':
-        debug(msg.debugText);
         client.sendText(from, msg.wait);
         client.sendText(from, quotes());
         client.sendText(from, msg.done);
         break;
       case '#wp':
-        debug(msg.debugText);
         client.sendText(from, msg.wait);
         wallpaper
           .then((result) => {
@@ -90,7 +83,6 @@ module.exports.messageHandler = async (message, client) => {
           });
         break;
       case '#zodiak':
-        debug(msg.debugText);
         client.sendText(from, msg.wait);
         getZodiak(args1, args2)
           .then((result) => {
@@ -103,7 +95,6 @@ module.exports.messageHandler = async (message, client) => {
           });
         break;
       case '#ramalan':
-        debug(msg.debugText);
         client.sendText(from, msg.wait);
         ramalanCinta(args1, args2, args3, args4)
           .then((result) => {
@@ -120,13 +111,10 @@ module.exports.messageHandler = async (message, client) => {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
           const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
           if (type === 'image' && !caption) {
-            debug(msg.errImgNoCaption);
             client.sendText(from, msg.errImgNoCaption);
           } else if (isThanks) {
-            debug(msg.debugText);
             client.sendText(from, msg.replyThanks);
           } else {
-            debug(msg.debugText);
             client.sendText(from, msg.errUnkCommand);
           }
         }
