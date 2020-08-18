@@ -78,8 +78,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
+            throw error;
           });
         break;
       case '#zodiak':
@@ -90,8 +89,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.wait);
           })
           .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
+            throw error;
           });
         break;
       case '#ramalan':
@@ -102,8 +100,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
+            throw error;
           });
         break;
       default:
