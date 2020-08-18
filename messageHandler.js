@@ -37,10 +37,12 @@ module.exports.messageHandler = async (message, client) => {
   };
 
   // debug all incoming message
-  if (isMedia) {
-    debug(msg.debugImage);
-  } else {
-    debug(msg.debugText);
+  if (!isGroupMsg) {
+    if (isMedia) {
+      debug(msg.debugImage);
+    } else {
+      debug(msg.debugText);
+    }
   }
 
   try {
