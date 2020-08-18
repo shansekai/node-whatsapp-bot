@@ -144,7 +144,7 @@ module.exports.messageHandler = async (message, client) => {
           } else if (commandArgs.includes('#anon')) {
             debug(inMsgAnon);
             client.sendText(from, waitDataMsg);
-            client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - ini pesan Anon`);
+            client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - Anonymous`);
             client.sendText(from, doneMsg);
           } else {
             debug(inMsg);
