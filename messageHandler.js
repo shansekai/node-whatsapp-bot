@@ -15,7 +15,7 @@ module.exports.messageHandler = async (message, client) => {
   const { from, sender, caption, type, quotedMsg, mimetype, body, isMedia, chat, isGroupMsg } = await message;
 
   const commandArgs = caption || body || '';
-  const command = commandArgs.toLowerCase().split(' ')[0];
+  const command = commandArgs.toLowerCase().split(' ')[0] || '';
   const args1 = commandArgs.split(' ')[1];
   const args2 = commandArgs.split(' ')[2];
   const args3 = commandArgs.split(' ')[3];
@@ -29,13 +29,12 @@ module.exports.messageHandler = async (message, client) => {
     debugSticker: `(${name} - ${number}) membuat stiker 🚀`,
     debugText: `(${name} - ${number}) mengirim pesan ${command} 📩`,
     debugImageNoCaption: `(${name} - ${number}) mengirim gambar tanpa caption 📩`,
-    debugAnonymous: `(${name} - ${number}) mengirim pesan anon ke seseorang 🎭`,
     wait: '_Tunggu sebentar ⏳_',
-    replyThanks: '_Iya sama - sama 🤖_',
-    wrongOrError: '_Kayaknya ada yang salah, coba lagi nanti 🚴🏻_',
-    imageNoCaption: '_Pakai caption ya jangan gambar doang, ketik #menu 🤖_',
-    unknown: '_Yang bener dong coba ketik *#menu*, kalau ngasal nanti aku block lho 🤖_',
-    done: '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_',
+    done: '_Selesai ✅, ketik *#menu* buat kembali 🤖_',
+    replyThanks: '_Iya sama - sama, ketik *#menu* buat kembali 🤖_',
+    errFailed: '_Ada kesalahan teknis, ketik *#menu* buat kembali 🤖_',
+    errImgNoCaption: '_Harus pakai caption, ketik *#menu* buat kembali 🤖_',
+    errUnkCommand: '_Perintah tidak terdaftar, ketik *#menu* buat kembali 🤖_',
   };
 
   try {
@@ -86,7 +85,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, msg.wrongOrError);
+            client.sendText(from, msg.errFailed);
             console.log(error.message);
           });
         break;
@@ -99,7 +98,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.wait);
           })
           .catch((error) => {
-            client.sendText(from, msg.wrongOrError);
+            client.sendText(from, msg.errFailed);
             console.log(error.message);
           });
         break;
@@ -112,7 +111,7 @@ module.exports.messageHandler = async (message, client) => {
             client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, msg.wrongOrError);
+            client.sendText(from, msg.errFailed);
             console.log(error.message);
           });
         break;
@@ -121,25 +120,20 @@ module.exports.messageHandler = async (message, client) => {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
           const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
           if (type === 'image' && !caption) {
-            debug(msg.imageNoCaption);
-            client.sendText(from, msg.imageNoCaption);
+            debug(msg.errImgNoCaption);
+            client.sendText(from, msg.errImgNoCaption);
           } else if (isThanks) {
             debug(msg.debugText);
             client.sendText(from, msg.replyThanks);
-          } else if (commandArgs.includes('#anon')) {
-            debug(msg.debugAnonymous);
-            client.sendText(from, msg.wait);
-            client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - Anonymous`);
-            client.sendText(from, msg.done);
           } else {
             debug(msg.debugText);
-            client.sendText(from, msg.unknown);
+            client.sendText(from, msg.errUnkCommand);
           }
         }
         break;
     }
   } catch (error) {
-    client.sendText(from, msg.wrongOrError);
+    client.sendText(from, msg.errFailed);
     console.log(error.message);
   }
 };

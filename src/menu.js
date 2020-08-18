@@ -19,13 +19,5 @@ _(contoh: #zodiak anya 11-11-1991)_
 *#ramalan <nama> <tgl> <nama> <tgl>*
 _Ramalan Kecocokan Cinta dengan Pasangan ❤️_
 _(contoh: #ramalan andi 11-11-1991 anggi 11-11-1991)_
-
-*#anon|<nomor pakai 62xx>|<pesan>*
-_Kirim Pesan Anonymous ke Seseorang 🎭_
-(contoh: #anon|6289111111111|hai kak)
   
 ** Donasi kesini ya https://saweria.co/mukhlis, biar aku bisa tetep hidup 🤖`;
-
-// *#ig <link>*
-// _Download foto 🖼 atau video 🎥 dari instagram_
-// _(contoh: #ig https://www.instagram.com/p/CD5mB72JXXv)_
