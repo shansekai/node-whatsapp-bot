@@ -1,4 +1,4 @@
-module.exports.menu = `Hai 🙋🏻‍♂️, ini daftar menu yang bisa kalian gunakan disini
+module.exports.menu = `Hai 🙋🏻‍♂️ selamat datang di MD Bot, ini daftar menu yang bisa kalian pakai
 
 *#sticker*
 _Bikin Stiker dari Gambar 🖼, kirim gambar dan beri caption atau bisa juga quote/reply dari gambar yang sudah ada di chat/group_
@@ -20,11 +20,11 @@ _(contoh: #zodiak anya 11-11-1991)_
 _Ramalan Kecocokan Cinta dengan Pasangan ❤️_
 _(contoh: #ramalan andi 11-11-1991 anggi 11-11-1991)_
 
-*#anon|<nomor>|<pesan>*
+*#anon|<nomor pakai 62xx>|<pesan>*
 _Kirim Pesan Anonymous ke Seseorang 🎭_
 (contoh: #anon|6289111111111|hai kak)
   
-** Kalau ada masalah atau mau request fitur bisa chat disini, kalau beruntung bakal dibalas admin`;
+** Donasi kesini https://saweria.co/mukhlis, biar bot ini tetep hidup.`;
 
 // *#ig <link>*
 // _Download foto 🖼 atau video 🎥 dari instagram_
