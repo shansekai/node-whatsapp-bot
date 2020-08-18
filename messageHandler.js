@@ -25,109 +25,94 @@ module.exports.messageHandler = async (message, client) => {
   const number = phoneNumber ? phoneNumber.number : '';
   const name = sender.pushname || chat.name || sender.verifiedName || '';
 
-  const stickerCreatedMsg = `(${name} - ${number}) membuat stiker 🚀`;
-  const inMsg = `(${name} - ${number}) mengirim pesan ${command} 📩`;
-  const inMsgImgNoCapt = `(${name} - ${number}) mengirim gambar tanpa caption 📩`;
-  const inMsgAnon = `(${name} - ${number}) mengirim pesan anon ke seseorang 🎭`;
-  const waitStickerMsg = '_Tunggu sebentar stiker lagi dibuat ⏳_';
-  const thxMsg = '_Iya sama - sama 🤖_';
-  // const waitVidMsg = '_Video lagi di upload tunggu aja 🎥_';
-  const waitDataMsg = '_Tunggu sebentar data lagi di proses ⏳_';
-  const wrongMsg = '_Kayaknya ada yang salah, coba nanti lagi 🚴🏻_';
-  const noCaptMsg = '_Pakai caption ya jangan gambar doang, ketik #menu 🤖_';
-  const unkMsg = '_Yang bener dong coba ketik *#menu*, kalau ngasal nanti aku block lho 🤖_';
-  const doneMsg = '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_';
+  const msg = {
+    debugSticker: `(${name} - ${number}) membuat stiker 🚀`,
+    debugText: `(${name} - ${number}) mengirim pesan ${command} 📩`,
+    debugImageNoCaption: `(${name} - ${number}) mengirim gambar tanpa caption 📩`,
+    debugAnonymous: `(${name} - ${number}) mengirim pesan anon ke seseorang 🎭`,
+    wait: '_Tunggu sebentar ⏳_',
+    replyThanks: '_Iya sama - sama 🤖_',
+    wrongOrError: '_Kayaknya ada yang salah, coba lagi nanti 🚴🏻_',
+    imageNoCaption: '_Pakai caption ya jangan gambar doang, ketik #menu 🤖_',
+    unknown: '_Yang bener dong coba ketik *#menu*, kalau ngasal nanti aku block lho 🤖_',
+    done: '_Tugas selesai 👌, buat liat semua menu bot ketik *#menu*, kalau mau share ke temen - temen kalian atau masukin ke grup juga boleh_',
+  };
 
   try {
     switch (command) {
       case '#sticker':
       case '#stiker':
         if (isMedia && type === 'image') {
-          debug(inMsg);
-          debug(stickerCreatedMsg);
-          client.sendText(from, waitStickerMsg);
+          debug(msg.debugText);
+          debug(msg.debugSticker);
+          client.sendText(from, msg.wait);
           const mediaData = await decryptMedia(message);
           const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
           client.sendImageAsSticker(from, imageBase64);
-          client.sendText(from, doneMsg);
+          client.sendText(from, msg.done);
         }
         if (quotedMsg && quotedMsg.type === 'image') {
-          debug(inMsg);
-          debug(stickerCreatedMsg);
-          client.sendText(from, waitStickerMsg);
+          debug(msg.debugText);
+          debug(msg.debugSticker);
+          client.sendText(from, msg.wait);
           const mediaData = await decryptMedia(quotedMsg);
           const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
           client.sendImageAsSticker(from, imageBase64);
-          client.sendText(from, doneMsg);
+          client.sendText(from, msg.done);
         }
         break;
       case '#menu':
-        debug(inMsg);
+        debug(msg.debugText);
         client.sendText(from, menu);
         break;
       case '#korona':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
+        debug(msg.debugText);
+        client.sendText(from, msg.wait);
         client.sendText(from, await korona());
-        client.sendText(from, doneMsg);
+        client.sendText(from, msg.done);
         break;
       case '#quotes':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
+        debug(msg.debugText);
+        client.sendText(from, msg.wait);
         client.sendText(from, quotes());
-        client.sendText(from, doneMsg);
+        client.sendText(from, msg.done);
         break;
-      // case '#ig':
-      //   debug(inMsg);
-      //   client.sendText(from, waitDataMsg);
-      //   await videoUrlLink.instagram.getInfo(args, async (error, info) => {
-      //     if (error) {
-      //       client.sendText(from, wrongMsg);
-      //       console.log(error.message);
-      //     } else {
-      //       const url = info.list[0].video ? info.list[0].video : info.list[0].image;
-      //       client.sendText(from, waitVidMsg);
-      //       await client.sendFileFromUrl(from, url);
-      //       client.sendText(from, doneMsg);
-      //     }
-      //   });
-      //   break;
       case '#wp':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
+        debug(msg.debugText);
+        client.sendText(from, msg.wait);
         wallpaper
           .then((result) => {
             client.sendFileFromUrl(from, result);
-            client.sendText(from, doneMsg);
+            client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, wrongMsg);
+            client.sendText(from, msg.wrongOrError);
             console.log(error.message);
           });
         break;
       case '#zodiak':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
+        debug(msg.debugText);
+        client.sendText(from, msg.wait);
         getZodiak(args1, args2)
           .then((result) => {
             client.sendText(from, result);
-            client.sendText(from, doneMsg);
+            client.sendText(from, msg.wait);
           })
           .catch((error) => {
-            client.sendText(from, wrongMsg);
+            client.sendText(from, msg.wrongOrError);
             console.log(error.message);
           });
         break;
       case '#ramalan':
-        debug(inMsg);
-        client.sendText(from, waitDataMsg);
+        debug(msg.debugText);
+        client.sendText(from, msg.wait);
         ramalanCinta(args1, args2, args3, args4)
           .then((result) => {
             client.sendText(from, result);
-            client.sendText(from, doneMsg);
+            client.sendText(from, msg.done);
           })
           .catch((error) => {
-            client.sendText(from, wrongMsg);
+            client.sendText(from, msg.wrongOrError);
             console.log(error.message);
           });
         break;
@@ -136,25 +121,25 @@ module.exports.messageHandler = async (message, client) => {
           const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
           const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
           if (type === 'image' && !caption) {
-            debug(inMsgImgNoCapt);
-            client.sendText(from, noCaptMsg);
+            debug(msg.imageNoCaption);
+            client.sendText(from, msg.imageNoCaption);
           } else if (isThanks) {
-            debug(inMsg);
-            client.sendText(from, thxMsg);
+            debug(msg.debugText);
+            client.sendText(from, msg.replyThanks);
           } else if (commandArgs.includes('#anon')) {
-            debug(inMsgAnon);
-            client.sendText(from, waitDataMsg);
+            debug(msg.debugAnonymous);
+            client.sendText(from, msg.wait);
             client.sendText(`${commandArgs.split('|')[1]}@c.us`, `${commandArgs.split('|')[2]} - Anonymous`);
-            client.sendText(from, doneMsg);
+            client.sendText(from, msg.done);
           } else {
-            debug(inMsg);
-            client.sendText(from, unkMsg);
+            debug(msg.debugText);
+            client.sendText(from, msg.unknown);
           }
         }
         break;
     }
   } catch (error) {
-    client.sendText(from, wrongMsg);
+    client.sendText(from, msg.wrongOrError);
     console.log(error.message);
   }
 };
