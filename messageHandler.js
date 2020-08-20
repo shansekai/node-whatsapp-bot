@@ -61,7 +61,7 @@ module.exports.messageHandler = async (message, client) => {
         const isExists = await Chats.exists({ 'data.id': element.id });
         if (!isExists) {
           const newChats = new Chats({ data: element });
-          newChats.save(async (err) => {
+          newChats.save((err) => {
             if (err) {
               client.sendText(from, err);
               console.log(err);
