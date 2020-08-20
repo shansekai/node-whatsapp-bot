@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 const { decryptMedia } = require('@open-wa/wa-automate');
 const { parsePhoneNumberFromString } = require('libphonenumber-js');
+// const dotenv = require('dotenv');
 const { debug } = require('./src/debug');
 const korona = require('./src/korona');
 const quotes = require('./src/quotes');
@@ -9,6 +10,9 @@ const { menu } = require('./src/menu');
 const { wallpaper } = require('./src/wallpaper');
 const { getZodiak } = require('./src/zodiak');
 const { ramalanCinta } = require('./src/ramalan');
+const { saveContact } = require('./db');
+
+// dotenv.config();
 
 module.exports.messageHandler = async (message, client) => {
   // eslint-disable-next-line object-curly-newline
@@ -141,4 +145,8 @@ module.exports.messageHandler = async (message, client) => {
       }
       break;
   }
+
+  // save chat contact to db
+  const contact = await client.getContact(from);
+  await saveContact(contact);
 };

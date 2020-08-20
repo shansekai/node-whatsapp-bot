@@ -3,7 +3,7 @@
 const { create } = require('@open-wa/wa-automate');
 const { messageHandler } = require('./messageHandler');
 const { debug } = require('./src/debug');
-const { Contacts } = require('./db');
+const { saveContact } = require('./db');
 
 const start = async (client) => {
   debug('The bot has started');
@@ -14,14 +14,7 @@ const start = async (client) => {
   // backup all chat to db
   const allChats = await client.getAllChats();
   allChats.forEach(async (element) => {
-    const isExists = await Contacts.exists({ contact: { id: element.id } });
-    if (!isExists) {
-      const newContacts = new Contacts(element);
-      await newContacts.save((err, doc) => {
-        if (err) debug('kontak gagal bisa disimpan');
-        debug(`kontak ${doc.contact.id} berhasil disimpan ke db`);
-      });
-    }
+    await saveContact(element);
   });
   // handle unread message after downtime
   // const unreadMessages = await client.getAllUnreadMessages();
