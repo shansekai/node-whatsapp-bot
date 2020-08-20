@@ -14,12 +14,12 @@ const start = async (client) => {
   // backup all chat to db
   const allChats = await client.getAllChats();
   allChats.forEach(async (element) => {
-    const isExists = await Contacts.exists({ id: element.id });
+    const isExists = await Contacts.exists({ contact: { id: element.id } });
     if (!isExists) {
       const newContacts = new Contacts(element);
       await newContacts.save((err, doc) => {
         if (err) debug('kontak gagal bisa disimpan');
-        debug(`kontak ${doc.id} berhasil disimpan ke db`);
+        debug(`kontak ${doc.contact.id} berhasil disimpan ke db`);
       });
     }
   });
