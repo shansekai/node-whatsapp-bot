@@ -19,14 +19,14 @@ const start = async (client) => {
     // newContacts.save((err, success) => {});
   });
   // handle unread message after downtime
-  const unreadMessages = await client.getAllUnreadMessages();
-  unreadMessages.forEach((element) => {
-    messageHandler(element, client);
-  });
+  // const unreadMessages = await client.getAllUnreadMessages();
+  // unreadMessages.forEach((element) => {
+  //   messageHandler(element, client);
+  // });
   // handle live message
-  client.onMessage(async (message) => {
-    messageHandler(message, client);
-  });
+  // client.onMessage(async (message) => {
+  //   messageHandler(message, client);
+  // });
 };
 
 const options = {
