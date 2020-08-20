@@ -11,20 +11,20 @@ const start = async (client) => {
     debug(`state changed - ${state.toLowerCase()} 🚑`);
     if (state === 'CONFLICT') client.forceRefocus();
   });
-  // backup all chat to db
+  // get all chat and save contact to db
   const allChats = await client.getAllChats();
   allChats.forEach(async (element) => {
     await saveContact(element);
   });
   // handle unread message after downtime
-  // const unreadMessages = await client.getAllUnreadMessages();
-  // unreadMessages.forEach((element) => {
-  //   messageHandler(element, client);
-  // });
+  const unreadMessages = await client.getAllUnreadMessages();
+  unreadMessages.forEach((element) => {
+    messageHandler(element, client);
+  });
   // handle live message
-  // client.onMessage(async (message) => {
-  //   messageHandler(message, client);
-  // });
+  client.onMessage(async (message) => {
+    messageHandler(message, client);
+  });
 };
 
 const options = {
