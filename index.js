@@ -17,7 +17,7 @@ const start = async (client) => {
     const isExists = await Contacts.exists({ id: element.id });
     if (!isExists) {
       const newContacts = new Contacts(element);
-      newContacts.save((err, doc) => {
+      await newContacts.save((err, doc) => {
         if (err) debug('kontak gagal bisa disimpan');
         debug(`kontak ${doc.id} berhasil disimpan ke db`);
       });
