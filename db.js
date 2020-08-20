@@ -14,7 +14,7 @@ db.once('open', () => {
 });
 
 const contactSchema = new mongoose.Schema({}, { strict: false });
-const Contacts = mongoose.model('Contacts', contactSchema);
+const Contacts = mongoose.model('Contacts', contactSchema, 'contacts');
 
 const saveContact = async (contact) => {
   const isExists = await Contacts.exists({ 'contact.id': contact.id });
