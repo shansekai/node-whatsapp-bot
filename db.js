@@ -1,7 +1,7 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const { debug } = require('./src/debug');
 
 dotenv.config();
 
@@ -13,18 +13,7 @@ db.once('open', () => {
   console.log('koneksi db sukses');
 });
 
-const contactSchema = new mongoose.Schema({}, { strict: false });
-const Contacts = mongoose.model('Contacts', contactSchema, 'contacts');
+const chatSchema = new mongoose.Schema({}, { strict: false });
+const Chats = mongoose.model('Chats', chatSchema, 'chats');
 
-const saveContact = async (contact) => {
-  const isExists = await Contacts.exists({ 'contact.id': contact.id });
-  if (!isExists) {
-    const newContacts = new Contacts(contact);
-    await newContacts.save((err, doc) => {
-      if (err) debug(`kontak ${doc.contact.id} sudah ada di db`);
-      debug(`kontak ${doc.contact.id} berhasil disimpan ke db`);
-    });
-  }
-};
-
-module.exports.saveContact = saveContact;
+module.exports = { Chats };
