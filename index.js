@@ -22,7 +22,7 @@ const start = async (client) => {
 };
 
 const options = {
-  headless: true,
+  headless: false,
   cacheEnabled: false,
 };
 
