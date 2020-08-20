@@ -14,10 +14,14 @@ const start = async (client) => {
   // backup all chat to db
   const allChats = await client.getAllChats();
   allChats.forEach(async (element) => {
-    console.log(element.id);
-    console.log(await Contacts.exists({ id: element.id }));
-    // const newContacts = new Contacts(element);
-    // newContacts.save((err, success) => {});
+    const isExists = await Contacts.exists({ id: element.id });
+    if (!isExists) {
+      const newContacts = new Contacts(element);
+      newContacts.save((err, doc) => {
+        if (err) debug('kontak gagal bisa disimpan');
+        debug(`kontak ${doc.id} berhasil disimpan ke db`);
+      });
+    }
   });
   // handle unread message after downtime
   // const unreadMessages = await client.getAllUnreadMessages();
