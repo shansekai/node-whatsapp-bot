@@ -3,12 +3,20 @@
 const { create } = require('@open-wa/wa-automate');
 const { messageHandler } = require('./messageHandler');
 const { debug } = require('./src/debug');
+const { Contacts } = require('./db');
 
 const start = async (client) => {
   debug('The bot has started');
   client.onStateChanged((state) => {
     debug(`state changed - ${state.toLowerCase()} 🚑`);
     if (state === 'CONFLICT') client.forceRefocus();
+  });
+  // backup all chat to db
+  const allChats = await client.getAllChats();
+  allChats.forEach((element) => {
+    console.log(element);
+    // const newContacts = new Contacts(element);
+    // newContacts.save((err, success) => {});
   });
   // handle unread message after downtime
   const unreadMessages = await client.getAllUnreadMessages();
