@@ -13,9 +13,9 @@ const start = async (client) => {
   });
   // backup all chat to db
   const allChats = await client.getAllChats();
-  allChats.forEach((element) => {
+  allChats.forEach(async (element) => {
     console.log(element.id);
-    console.log(Contacts.exists({ id: element.id }));
+    console.log(await Contacts.exists({ id: element.id }));
     // const newContacts = new Contacts(element);
     // newContacts.save((err, success) => {});
   });
