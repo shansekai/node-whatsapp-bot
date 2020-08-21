@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-loop-func */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
@@ -140,34 +142,36 @@ module.exports.messageHandler = async (message, client) => {
           client.sendText(from, msg.errImgNoCaption);
         } else if (isThanks) {
           client.sendText(from, msg.replyThanks);
-        } else if (from === process.env.ADMIN_CONTACT) {
-          if (command === '#savendelete') {
-            const allChats = await client.getAllChats();
-            client.sendText(from, `total chat di hp saat ini => ${allChats.length}`);
-            // loop all chats
-            // eslint-disable-next-line no-restricted-syntax
-            for await (const element of allChats) {
-              // check if chat exist in db
-              const isExists = await Chats.exists({ 'data.id': element.id });
-              if (!isExists) {
-                const newChats = new Chats({ data: element });
-                newChats.save((err) => {
-                  if (err) {
-                    client.sendText(from, err);
-                    console.log(err);
-                  } else {
-                    // delete chat
-                    client.deleteChat(element.id);
-                    debug(`${element.id} BERHASIL di simpan ke db`);
-                  }
-                });
-              } else {
-                // delete chat
-                client.deleteChat(element.id);
-                debug(`${element.id} SUDAH ADA di db`);
-              }
+        } else if (from === process.env.ADMIN_CONTACT && command === '#savendelete') {
+          const allChats = await client.getAllChats();
+          client.sendText(from, `total chat di hp => ${allChats.length}`);
+          let saved = 0;
+          let skiped = 0;
+          let failed = 0;
+          for await (const element of allChats) {
+            const isExists = await Chats.exists({ 'data.id': element.id });
+            if (!isExists) {
+              const newChats = new Chats({ data: element });
+              newChats.save((err) => {
+                if (err) {
+                  failed++;
+                  client.sendText(from, err);
+                  console.log(err);
+                } else {
+                  // delete chat
+                  saved++;
+                  debug(`${element.id} BERHASIL di simpan ke db`);
+                  client.deleteChat(element.id);
+                }
+              });
+            } else {
+              // delete chat
+              skiped++;
+              debug(`${element.id} SUDAH ADA di db`);
+              client.deleteChat(element.id);
             }
           }
+          client.sendText(from, `berhasil => ${saved}\ngagal => ${failed}\nskip duplikat => ${skiped}`);
         }
       } else {
         client.sendText(from, msg.errUnkCommand);
