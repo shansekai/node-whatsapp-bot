@@ -50,131 +50,128 @@ module.exports.messageHandler = async (message, client) => {
     }
   }
 
-  // handle admin message
-  if (from === process.env.ADMIN_CONTACT) {
-    if (command === '#savendelete') {
-      const allChats = await client.getAllChats();
-      client.sendText(from, `total chat di hp saat ini => ${allChats.length}`);
-      // loop all chats
-      // eslint-disable-next-line no-restricted-syntax
-      for await (const element of allChats) {
-        // check if chat exist in db
-        const isExists = await Chats.exists({ 'data.id': element.id });
-        if (!isExists) {
-          const newChats = new Chats({ data: element });
-          newChats.save((err) => {
-            if (err) {
-              client.sendText(from, err);
-              console.log(err);
-            } else {
-              // delete chat
-              client.deleteChat(element.id);
-              console.log(`${element.id} berhasil di simpan ke db`);
-            }
-          });
-        } else {
-          // delete chat
-          client.deleteChat(element.id);
-          console.log(`${element.id} sudah ada di db`);
+  switch (command) {
+    case '#sticker':
+    case '#stiker':
+      try {
+        if (isMedia && type === 'image') {
+          client.sendText(from, msg.wait);
+          const mediaData = await decryptMedia(message);
+          const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
+          client.sendImageAsSticker(from, imageBase64);
+          client.sendText(from, msg.done);
         }
+        if (quotedMsg && quotedMsg.type === 'image') {
+          client.sendText(from, msg.wait);
+          const mediaData = await decryptMedia(quotedMsg);
+          const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
+          client.sendImageAsSticker(from, imageBase64);
+          client.sendText(from, msg.done);
+        }
+      } catch (error) {
+        client.sendText(from, msg.errFailed);
+        console.log(error.message);
       }
-    }
-  } else {
-    switch (command) {
-      case '#sticker':
-      case '#stiker':
-        try {
-          if (isMedia && type === 'image') {
-            client.sendText(from, msg.wait);
-            const mediaData = await decryptMedia(message);
-            const imageBase64 = `data:${mimetype};base64,${mediaData.toString('base64')}`;
-            client.sendImageAsSticker(from, imageBase64);
-            client.sendText(from, msg.done);
-          }
-          if (quotedMsg && quotedMsg.type === 'image') {
-            client.sendText(from, msg.wait);
-            const mediaData = await decryptMedia(quotedMsg);
-            const imageBase64 = `data:${quotedMsg.mimetype};base64,${mediaData.toString('base64')}`;
-            client.sendImageAsSticker(from, imageBase64);
-            client.sendText(from, msg.done);
-          }
-        } catch (error) {
-          client.sendText(from, msg.errFailed);
-          console.log(error.message);
-        }
-        break;
-      case '#menu':
-        client.sendText(from, menu);
-        break;
-      case '#korona':
-        try {
-          client.sendText(from, msg.wait);
-          client.sendText(from, await korona());
+      break;
+    case '#menu':
+      client.sendText(from, menu);
+      break;
+    case '#korona':
+      try {
+        client.sendText(from, msg.wait);
+        client.sendText(from, await korona());
+        client.sendText(from, msg.done);
+      } catch (error) {
+        client.sendText(from, msg.errFailed);
+        console.log(error.message);
+      }
+      break;
+    case '#quotes':
+      try {
+        client.sendText(from, msg.wait);
+        client.sendText(from, quotes());
+        client.sendText(from, msg.done);
+      } catch (error) {
+        client.sendText(from, msg.errFailed);
+        console.log(error.message);
+      }
+      break;
+    case '#wp':
+      client.sendText(from, msg.wait);
+      wallpaper
+        .then((result) => {
+          client.sendFileFromUrl(from, result);
           client.sendText(from, msg.done);
-        } catch (error) {
+        })
+        .catch((error) => {
           client.sendText(from, msg.errFailed);
           console.log(error.message);
-        }
-        break;
-      case '#quotes':
-        try {
+        });
+      break;
+    case '#zodiak':
+      client.sendText(from, msg.wait);
+      getZodiak(args1, args2)
+        .then((result) => {
+          client.sendText(from, result);
           client.sendText(from, msg.wait);
-          client.sendText(from, quotes());
-          client.sendText(from, msg.done);
-        } catch (error) {
+        })
+        .catch((error) => {
           client.sendText(from, msg.errFailed);
           console.log(error.message);
-        }
-        break;
-      case '#wp':
-        client.sendText(from, msg.wait);
-        wallpaper
-          .then((result) => {
-            client.sendFileFromUrl(from, result);
-            client.sendText(from, msg.done);
-          })
-          .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
-          });
-        break;
-      case '#zodiak':
-        client.sendText(from, msg.wait);
-        getZodiak(args1, args2)
-          .then((result) => {
-            client.sendText(from, result);
-            client.sendText(from, msg.wait);
-          })
-          .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
-          });
-        break;
-      case '#ramalan':
-        client.sendText(from, msg.wait);
-        ramalanCinta(args1, args2, args3, args4)
-          .then((result) => {
-            client.sendText(from, result);
-            client.sendText(from, msg.done);
-          })
-          .catch((error) => {
-            client.sendText(from, msg.errFailed);
-            console.log(error.message);
-          });
-        break;
-      default:
-        if (!isGroupMsg) {
-          const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
-          const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
-          if (type === 'image' && !caption) {
-            client.sendText(from, msg.errImgNoCaption);
-          } else if (isThanks) {
-            client.sendText(from, msg.replyThanks);
-          } else {
-            client.sendText(from, msg.errUnkCommand);
+        });
+      break;
+    case '#ramalan':
+      client.sendText(from, msg.wait);
+      ramalanCinta(args1, args2, args3, args4)
+        .then((result) => {
+          client.sendText(from, result);
+          client.sendText(from, msg.done);
+        })
+        .catch((error) => {
+          client.sendText(from, msg.errFailed);
+          console.log(error.message);
+        });
+      break;
+    default:
+      if (!isGroupMsg) {
+        const thanks = ['terimakasi', 'makasi', 'thx', 'thank', 'trim', 'oke'];
+        const isThanks = !!new RegExp(thanks.join('|')).test(commandArgs.toLowerCase());
+        if (type === 'image' && !caption) {
+          client.sendText(from, msg.errImgNoCaption);
+        } else if (isThanks) {
+          client.sendText(from, msg.replyThanks);
+        } else if (from === process.env.ADMIN_CONTACT) {
+          if (command === '#savendelete') {
+            const allChats = await client.getAllChats();
+            client.sendText(from, `total chat di hp saat ini => ${allChats.length}`);
+            // loop all chats
+            // eslint-disable-next-line no-restricted-syntax
+            for await (const element of allChats) {
+              // check if chat exist in db
+              const isExists = await Chats.exists({ 'data.id': element.id });
+              if (!isExists) {
+                const newChats = new Chats({ data: element });
+                newChats.save((err) => {
+                  if (err) {
+                    client.sendText(from, err);
+                    console.log(err);
+                  } else {
+                    // delete chat
+                    client.deleteChat(element.id);
+                    console.log(`${element.id} berhasil di simpan ke db`);
+                  }
+                });
+              } else {
+                // delete chat
+                client.deleteChat(element.id);
+                console.log(`${element.id} sudah ada di db`);
+              }
+            }
           }
         }
-        break;
-    }
+      } else {
+        client.sendText(from, msg.errUnkCommand);
+      }
+      break;
   }
 };
