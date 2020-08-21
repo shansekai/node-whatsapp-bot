@@ -56,7 +56,8 @@ module.exports.messageHandler = async (message, client) => {
       const allChats = await client.getAllChats();
       client.sendText(from, `total chat di hp saat ini => ${allChats.length}`);
       // loop all chats
-      allChats.forEach(async (element) => {
+      // eslint-disable-next-line no-restricted-syntax
+      for await (const element of allChats) {
         // check if chat exist in db
         const isExists = await Chats.exists({ 'data.id': element.id });
         if (!isExists) {
@@ -68,13 +69,15 @@ module.exports.messageHandler = async (message, client) => {
             } else {
               // delete chat
               client.deleteChat(element.id);
+              console.log(`${element.id} berhasil di simpan ke db`);
             }
           });
         } else {
           // delete chat
           client.deleteChat(element.id);
+          console.log(`${element.id} sudah ada di db`);
         }
-      });
+      }
     }
   } else {
     switch (command) {
