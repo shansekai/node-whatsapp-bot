@@ -172,10 +172,10 @@ module.exports.messageHandler = async (message, client) => {
             }
           }
           client.sendText(from, `berhasil => ${saved}\ngagal => ${failed}\nskip duplikat => ${skiped}`);
+        } else {
+          client.sendText(from, msg.errUnkCommand);
         }
-      } else {
-        client.sendText(from, msg.errUnkCommand);
+        break;
       }
-      break;
   }
 };
