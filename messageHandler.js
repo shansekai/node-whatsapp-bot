@@ -158,13 +158,13 @@ module.exports.messageHandler = async (message, client) => {
                   } else {
                     // delete chat
                     client.deleteChat(element.id);
-                    console.log(`${element.id} berhasil di simpan ke db`);
+                    debug(`${element.id} BERHASIL di simpan ke db`);
                   }
                 });
               } else {
                 // delete chat
                 client.deleteChat(element.id);
-                console.log(`${element.id} sudah ada di db`);
+                debug(`${element.id} SUDAH ADA di db`);
               }
             }
           }
